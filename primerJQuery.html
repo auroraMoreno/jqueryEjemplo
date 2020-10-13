@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .rojo{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="rojo">Titulo 1</h1>
+    <h2 class="rojo">Titulo 2</h2>
+    <h1 class="rojo">Titulo 3</h1>
+    <h2 id="titulo4">Titulo 4</h2>
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        //Intruccion para cuando ha cargado la página
+        $("document").ready(function () {
+            //Codigo js y jquery
+            //se puede usar cualquier instruccion de js
+            //todo funciona con selectores: etiqueta (actuan sobre todos los obj)
+            //$("h1").hide();
+
+            //asignar eventos medainte selectores
+            $("h2").click(function () {
+                //la palabra clave this accede al objeto que ha realizado la peticion al metodo
+                //this debe escribirse como jquery si no capturamos otro objeto distinto de js
+                //var js = this; //aqui no está el h2 bc es una var de js 
+
+                //aqui tenemos el h2
+                //var jquery = $(this);
+
+                $(this).fadeOut();
+
+            });
+
+            $(".rojo").mouseover(function () {
+                $(this).fadeOut(5000);
+            });
+            $("#titulo4").click(function () {
+                alert("Pulsado");
+            });
+        });
+    </script>
+</body>
+
+</html>

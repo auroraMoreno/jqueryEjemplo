@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Ejemplo each()</h1>
+    <p>aaaaa</p>
+    <p></p><p></p><p></p><p></p><p></p><p></p>
+
+
+
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("p").click(function () {
+                var colores = ["blue", "yellow", "red", "orange", "fuchsia"];
+                $("p").each(function () { //tener accion previa que lo desencadene (en este caso el click)
+                    var aleat = parseInt(Math.random() * colores.length);
+                    //cada parrafo tenga un color diferente 
+                    var color = colores[aleat];
+                    $(this).css("background-color", color);
+                    $(this).text(color);
+                    
+                });
+            });
+        });
+    </script>
+</body>
+</html>

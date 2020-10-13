@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    
+</head>
+<body>
+    <h1>Generar objetos JQuery</h1>
+    <form>
+        <input type="range" id="rango" value="1"
+               min="1" max="30" /><span id="rangovalor">1</span>
+        <hr />
+        <div id="capa">
+        </div>
+    </form>
+
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#rango").change(function () {
+                var valorRango = parseInt($("#rango").val()); //aqui se puede usara this en vez de rango
+                var span = $("#rangovalor");
+                span.text(valorRango);
+                var capa = $("#capa");
+                capa.text("");
+                for (var i = 1; i < valorRango; i++) {
+                    var img = $("<img/>", {
+                        "src": "imagenes/descarga.jpg",
+                        "style":"height:80px;width:80px"
+                    });
+                    img.mouseover(function () {
+                        $(this).attr("src","imagenes/FB-paisajes-espectaculares-fjordland-new-zealand-800x419.jpg");
+                    });
+                    capa.append(img);
+                    //añadir un mouseout
+                }
+            });
+        });
+    </script>
+</body>
+</html>

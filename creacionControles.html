@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+<h1>Generar controles dinámicamente</h1>
+   <form>
+       <label>Contenido</label>
+       <input type="text" id="cajaContenido"/>
+       <button type="button" id="botonCreacion">Crear título</button>
+       <div id="padre"></div>
+   </form>
+    
+
+
+<script src="js/jquery-3.5.1.min.js"></script>
+ <script>
+     $(document).ready(function () {
+         $("#botonCreacion").click(function () {
+             var texto = $("#cajaContenido").val();
+             //crear objeto con varias lineas
+             //var h1 = $("<h1>");
+             //h1.text(texto);
+             //h1.css("color", "green");
+             //h1.css("background-color", "lightpink");
+             //$("#padre").append(h1);
+             //crear obj con sus propiedades en una sola linea; formato json
+             // var objeto = $("<tag>", {"text":"soy un txto"...});
+             var h1 = $("<h1>", {
+                 "text": texto,
+                 "style":"background-color:blue;color:white"
+             });
+             //Podemos agregar del hijo al padre
+             h1.appendTo($("#padre"));
+             //si se quiere que los lementos tengan eventos: realizar métodos delegados (event handler
+             //para el obj creado dinamicamente
+             //dos sintaxis
+             //h1.on("click", function () {
+             //    //con this accedemos al objeto h1
+             //    $(this).text("Texto cambiado");
+                 
+             //});
+
+             //sintaxis segunda forma
+             //propia de jquery
+             h1.click(function () {
+                 $(this).text("Cambiado");
+             });
+             
+
+         });
+         //eventos activos para obj hechos dinámicamente: 
+         //solamente entran en el juego de eventos en la carga de la pagina, los evento para obj dinámicos no funcionan
+         $("h1").click(function () {
+             alert("Hola");
+         });
+     });
+ </script>
+</body>
+</html>

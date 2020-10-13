@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form>
+    <label>Numero 1</label>
+    <input type="text" id="caja1"/>
+    <br/>
+
+    <label>Numero 2</label>
+    <input type="text" id="caja2" />
+    <br />
+
+    <button type="button" id="botonSumar">Sumar</button>
+    </form>
+
+    <h1 id="resultado"></h1>
+
+
+ <script src="js/jquery-3.5.1.min.js"></script>
+<script>
+    $("document").ready(function () {
+        //Capturamos el click del boton 
+        $("#botonSumar").click(function () {
+            //Capturamos valor cajas
+            var num1 = $("#caja1").val(); //hay que parsearlo
+            var num2 = $("#caja2").val();
+            var total = parseInt(num1) + parseInt(num2);
+            $("#resultado").text(total);
+            $("#resultado").css("color", "fuchsia");
+        });
+    });
+</script>
+</body>
+</html>
