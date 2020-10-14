@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Ejemplo Data Key</h1>
+    <button type="button" id="botonbotones">Generar botones</button>
+    <button type="button" id="botonlinks">Generar Links</button>
+    <h1 id="resultado" style="color:mediumspringgreen"></h1>
+    <hr />
+    <div id="capabotones"></div>
+    <hr />
+    <div id="capalinks"></div>
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        function generarNumeros() {
+            var aleatorio = parseInt(Math.random() * 100);
+            return aleatorio;
+        }
+        $(document).ready(function () {
+            $("#botonbotones").click(function () {
+                for (var i = 1; i <= 5; i++) {
+                    var boton = $("<button>", {
+                        "text": "Sorpresa",
+                        "value": generarNumeros()
+                    });
+                    $("#capabotones").append(boton);
+                    boton.click(function () {
+                        $("#resultado").text($(this).val());
+                    });
+                }
+            });
+
+            //hacer lo mismo con controles href, controles sin ningun sitio para almacenar ese value
+            //sobre todo util cuando hay un elemento quee no puede almacenar un value por ejemplo 
+            $("#botonlinks").click(function () {
+                for (var i = 1; i <= 5; i++) {
+                    var link = $("<a>", {
+                        "text": "Sorpresa",
+                        "href": "#",
+                        "data-valor": generarNumeros() //le añade un valor 
+                    });
+                    $("#capalinks").append(link);
+                    link.click(function () {
+                        var valor = $(this).data("valor"); //coge lo que ha generado que es data-valor
+                        $("#resultado").text($(this).val());
+                    });
+                    //link.data("valor", generarNumeros()); lo mismo que arriba 
+                }
+            });
+        });
+    </script>
+</body>
+</html>

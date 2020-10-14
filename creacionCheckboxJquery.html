@@ -7,12 +7,17 @@
 <body>
     <h1>Creación Checkbox dinámicos</h1>
     <h2 style="color:blue" id="resultado">0</h2>
+  
     <form>
         <label>Seleccione número de casillas: </label>
         <br />
         <input type="range" id="rango" value="1"
                min="1" max="30" />
         <span id="span">1</span>
+        <br/>
+        <label>Seleccione posicion:</label>
+        <input type="text"  id="cajaposicion"/>
+        <button type="button" id="botoneliminar">Eliminar checkbox</button>
     </form>
     <div id="capa"></div>
 
@@ -21,13 +26,21 @@
     <script src="js/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function () {
+            $("#botoneliminar").click(function () {
+                var posicion = parseInt($("#cajaposicion").val());
+                //acceder a un parent (capa y a todos los hijos que se tengan  en su interior)
+                //para acceder a hijos: childern, 
+                //para recuperar obj a partir de un posicion en el dibujo: eq() empieza en 0 
+                $("#capa").children().eq(posicion).remove();
+
+            });
             $("#rango").change(function () {
               
              var valorRango = parseInt($("#rango").val()); //aqui se puede usara this en vez de rango
              var span = $("#span");
              span.text(valorRango);
               var capa = $("#capa");
-                capa.text("");
+                capa.text(""); //también se puede limpiar con .empty() borra todos los hijo o .remove() elimina los controles
                 for (var i = 1; i <= valorRango; i++) {
                     var check = $("<input/>", {
                         "type": "checkbox"
@@ -50,19 +63,6 @@
                         resultado.text(numeroFin);
                     });
 
-
-                    //check.each(function () {
-                    //  var suma = 0;
-                    //    $(this).prop("checked", function () {
-                    //    var valorCheck = parseInt(check.val());
-                    //    suma += valorCheck
-                    //    console.log(suma)
-                    //    $("#resultado").text(suma);
-                    //});
-                    //});
-
-
-                     
 
                 }
                 

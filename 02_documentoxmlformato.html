@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        function realizarPeticion() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.addEventListener("load", mostrarDatos);
+            xhttp.open("GET", "xml/empleados.xml");
+            xhttp.send();
+        }
+
+        function mostrarDatos() {
+            //2 propiedades que indican si una peticion ha sido correcta, en el obj this
+            //aqui entra una vez peticion finalizada, ya sea peticion correcta e incorrecta 
+            //this.readyState: si ha finalizado la lectura (4) correcta
+            //this.status: el código de la respuesta: (404) si es correcta (200 0 201) 
+            var contenido = document.getElementById("contenido");
+            if (this.readyState == 4 && this.status == 200) {
+                //el obj xmlRequest se puede manejar con los metodos dom del html 
+                //dicho obj viene en la propiedad this.responseXML 
+                //capturar contenido del html que estamos leyendo 
+                var docxml = this.responseXML;
+                //vamos a buscar a un conjunto de nodos para aislar los apellidos 
+                //es case sensitive 
+                var nodosapellido = docxml.getElementsByTagName("APELLIDO");
+                var html = "<ul>";
+                //Devuelto un conjunto de nodos
+                for (var i = 0; i < nodosapellido.length; i++) {
+                    var nodo = nodosapellido[i]; //tengo el tag name + contenido de texto, todo dentro de la misma posicions 
+                    //todo nodo puede tener a su vez hijos 
+                    //existe propiedad para acceder de forma jerarquica a los hijos: childNodes 
+                    //array para acceder al hijo[0]... 
+                    //teniendo algun hijo se puede mostrar su valor o seguir bajanaod más hijos ç
+                    var apellido = nodo.textContent;
+                    html += "<li>" + apellido + "</li>";
+                }
+
+                html += "<ul>";
+                contenido.innerHTML = html; 
+            } else {
+                contenido.innerHTML = "<h1 style='color:red'>" + "La peticion ha sido incorrecta" + this.status
+                    + "</h1>";
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Empleados.xml con formato</h1>
+    <button type="button" onclick="realizarPeticion()">Leer empleados con formato</button>
+    <div id="contenido"></div>
+</body>
+</html>

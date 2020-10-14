@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        img {
+            height: 80px;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <input type="range" id="rango" value="1" min="1" max="30" />
+    <span id="span">1</span>
+    <div id="capaBotones"></div>
+    <div id="capaImagenes"></div>
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        //function alternarImagenes() {
+        //    var img1 = "imagenes/FB-paisajes-espectaculares-fjordland-new-zealand-800x419.jpg";
+        //    return img1;
+
+        //}
+
+        $(document).ready(function () { //mirar ejercicio que pone var posicion
+            $("#rango").change(function () {
+                var valorRango = parseInt($(this).val());
+                var capaBotones = $("#capaBotones");
+                capaBotones.text("");
+                var span = $("#span");
+                span.text(valorRango);
+                for (var i = 1; i <= valorRango; i++) {
+                    var boton = $("<button>", {
+                        "text": "Imagen " + i,
+                        "data-img": i
+                    });
+                    var img = $("<img/>", {
+                        "src": "imagenes/descarga.jpg",
+                    });
+                    $("#capaBotones").append(boton);
+                    $("#capaImagenes").append(img);
+
+                    boton.click(function () {
+                        var posicion = parseInt($(this).data("img")) - 1;
+                        var img2 = $("#capaImagenes").children().eq(posicion);
+                        img2.attr("src", "imagenes/FB-paisajes-espectaculares-fjordland-new-zealand-800x419.jpg");
+                    });
+                }
+
+            });
+        });
+    </script>
+</body>
+</html>
