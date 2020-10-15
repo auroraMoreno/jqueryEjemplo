@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        //Al cargar la página necesitamso que los empleados ya estén cargados en el <select>
+
+        window.onload = function () {
+            //funcion anonima para cargar datos a la select
+            var xhttp = new XMLHttpRequest();
+            xhttp.addEventListener("load", function () {
+                //codigo para cuando tengamos respuesta del servidor 
+                //aqui cargamos el control select 
+                if (this.readyState == 4 && this.status == 200){
+                    //primero buscar el select donde vamos a add los datos
+                    var select = document.getElementById("selectempleados");
+                    var nodosapellidos = this.responseXML.getElementsByTagName("APELLIDO");
+                    for (var nodoape of nodosapellidos) {
+                        var apellido = nodoape.textContent;
+                        var option = document.createElement("option");
+                        option.innerText = apellido;
+                        option.value = apellido;
+                        select.appendChild(option);
+                    }
+            }
+            });
+            xhttp.open("GET", "xml/datosempleados.xml");
+            xhttp.send();
+        }
+
+        function realizarPeticion() {
+            //cuando peticion server mejor crearse objetos nuevos para que no arrastre elementos
+            //se pueden hacer tantas xmlRequest comose quiera
+            var xhttp = new XMLHttpRequest();
+            xhttp.addEventListener("load", leerDatosEmpleado); //delegacion de código
+            xhttp.open("GET", "xml/datosempleados.xml");
+            xhttp.send(); 
+            
+
+        }
+
+        //coger el empleado seleccionado y bajar para coger el apellido o lo que quiera
+        function leerDatosEmpleado() {
+            if (this.readyState == 4 && this.status == 200) {
+                var posicion = -1;
+                //Necesitamos averiguar el opt seleccionado del select
+                var select = document.getElementById("selectempleados");
+                //necesitamos la posicion del elementos seleccionado (<empleado>)
+                for (var i = 0; i < select.options.length; i++) {
+                    var opt = select.options[i]; //captura cada opcion individual 
+                    if (opt.selected == true) {
+                        //necesitamos la posicion del elementos 
+                        posicion = i;
+                        break; //con esto salimos del bucle cuando tengamos la posicion
+                    }
+                }
+                //Noc centramos en doc xml 
+                //queremos el oficio
+                var docxml = this.responseXML; //capturamos el docuemnto xml en esta var 
+                var nodosempleado = docxml.getElementsByTagName("EMPLEADO"); //ahora tiene el <empleado> (todos los que haya)
+                var empleado = nodosempleado[posicion] //de todos los que haya quiero la posicion 
+
+                //con chilnode acceso a los hijos; No usar bc tiene un funcionamiento raro
+                //si apellido: primer hijo; si empleado: segundo hijo 
+                //var apellido = empleado.childNodes[0].textContent; //ahora está en <apellido> y con textContent tiene el apellido
+                //var oficio = empleado.childNodes[1].textContent; 
+
+                var apellido = empleado.getElementsByTagName("APELLIDO")[0].textContent; //coge de todas las etiquetas apellido de la etiqueta empleado select
+                var oficio = empleado.getElementsByTagName("OFICIO")[0].textContent;
+                document.getElementById("datooficio").innerText = apellido + ", " + oficio;
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Búsqueda empleados JavaScript Select</h1>
+    <form>
+        <label>Seleccione un empleado</label>
+        <select id="selectempleados" onchange="realizarPeticion()"></select>
+        <h1 style="color:paleturquoise" id="datooficio"></h1>
+    </form>
+</body>
+</html>

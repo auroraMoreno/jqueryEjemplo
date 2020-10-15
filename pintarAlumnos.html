@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var xhttp = new XMLHttpRequest();
+            xhttp.addEventListener("load", function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    //var docxml = this.responseXML;
+                    var ul = document.getElementById("listaAlumnos");
+                    var nodosnombre = this.responseXML.getElementsByTagName("nombre");
+                    for (var n of nodosnombre) {
+                        var nombre = n.textContent;
+                        var link = document.createElement("a");
+                        link.setAttribute("href", "#");
+                        link.setAttribute("name", "nombreattr");
+                        link.innerHTML = nombre;
+                        ul.appendChild(link);
+                    }
+                    link.addEventListener("click", realizarPeticion);
+
+                }
+            });
+            xhttp.open("GET", "xml/alumnos.xml");
+            xhttp.send();
+        }
+
+        function realizarPeticion() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.addEventListener("load", pintarDatosAlumno); 
+            xhttp.open("GET", "xml/alumnos.xml");
+            xhttp.send(); 
+        }
+
+        function pintarDatosAlumno() {
+            //var resultado = document.getElementById("resultado");
+
+            if (this.readyState == 4 && this.status == 200) {
+            var docxml = this.responseXML;  
+            var nodosalumno = docxml.getElementsByTagName("alumno"); 
+                var posicion = -1;
+                var nombres = document.getElementsByName("nombreattr");
+                for (var i = 0; i < nombres.length; i++) {
+                    var name = nombres[i];
+                    posicion = i;
+                }
+
+                var alumno = nodosalumno[posicion];
+
+                var nombre = alumno.getElementsByTagName("nombre")[0].textContent;
+                var nota = alumno.getElementsByTagName("nota")[0].textContent;
+                document.getElementById("resultado").innerText = nombre + ", " + nota;
+
+            }
+        }
+        //dataset es la forma de rcupera de un data-key, un value; si no existe lo crea y si existe lo sustituye
+
+    </script>
+</head>
+<body>
+    <ul id="listaAlumnos">
+
+    </ul>
+    <div id="resultado">
+    </div>
+    
+</body>
+</html>
