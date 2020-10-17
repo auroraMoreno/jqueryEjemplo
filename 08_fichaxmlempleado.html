@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .datos {
+            background-color: palegreen;
+            color: mediumpurple;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ficha de empleado</h1>
+    <label>Elija empleado</label>
+    <select id="listaEmpleados" class="form-control">
+        <option>Elige</option>
+    </select>
+    <div id="datosEmpleados" class="datos"></div>
+
+
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //var option = $("<option>");
+            $.get("xml/ClientesXML.xml", function (data) {
+                var clientes = $(data).find("CLIENTE");
+                //var select = $("#listaEmpleados");
+                clientes.each(function () {
+                    var id = $(this).attr("IDCLIENTE");
+                    var nombre = $(this).find("NOMBRE");
+                    var option = $("<option>", {
+                        "text": nombre.text(),
+                        "value": id
+                    });
+                    $("#listaEmpleados").append(option);
+                    $("#listaEmpleados").change(function () {
+                        var value = $(this).val();
+                        var filtro = "CLIENTE[IDCLIENTE=" + value + "]";
+                        console.log(filtro);
+                        var empleados = $(data).find(filtro);
+                        if (empleados.length == 0) {
+                            $("#datosEmpleados").html("<h1> " + "Sin resultados" + "</h1>");
+                        } else {
+                            var html = "";
+                            empleados.each(function () {
+                                var nombre = $(this).find("NOMBRE").text();
+                                var direccion = $(this).find("DIRECCION").text();
+                                var email = $(this).find("EMAIL").text();
+                                var codigoPostal = $(this).find("CODIGOPOSTAL").text();
+                                var paginaweb = $(this).find("PAGINAWEB").text();
+                                var img = $(this).find("IMAGENCLIENTE").text();
+                                html += "<h2>" + nombre + "</h2>" + "<img src='" + img + "'class='img-thumbnail'/>" + "<p>" + direccion + "</p>"
+                                    + "<p>" + email + "</p>" + "<p>" + codigoPostal + "</p>" + "<p>" + "<a href='" + paginaweb + "'>" + paginaweb + "</a></p>";
+                            });
+                            $("#datosEmpleados").html(html);
+                        }
+
+
+
+
+
+                    });
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

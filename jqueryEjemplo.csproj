@@ -72,14 +72,30 @@
     <Content Include="03_empleadosjscombo.html" />
     <Content Include="05_empleadossimplejquery.html" />
     <Content Include="06_hospitalxmlatributos.html" />
+    <Content Include="07_filtrarcontenidosxml.html" />
+    <Content Include="08_fichaxmlempleado.html" />
+    <Content Include="09_ejemploplantillabootstrap.html" />
+    <Content Include="10_documentosimplejson.html" />
     <Content Include="cajasSumarAleatorios.html" />
     <Content Include="creacionCheckboxJquery.html" />
     <Content Include="creacionControles.html" />
+    <Content Include="css\bootstrap-grid.css" />
+    <Content Include="css\bootstrap-grid.min.css" />
+    <Content Include="css\bootstrap-reboot.css" />
+    <Content Include="css\bootstrap-reboot.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\jumbotron.css" />
     <Content Include="ejemplodatakey.html" />
     <Content Include="ejemploeach.html" />
     <Content Include="generarImagenes.html" />
     <Content Include="imagenes\descarga.jpg" />
     <Content Include="imagenes\FB-paisajes-espectaculares-fjordland-new-zealand-800x419.jpg" />
+    <Content Include="js\bootstrap.bundle.js" />
+    <Content Include="js\bootstrap.bundle.min.js" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\fichaxmlempleado.js" />
     <Content Include="js\jquery-3.5.1.min.js" />
     <Content Include="pintarAlumnos.html" />
     <Content Include="primerJQuery.html" />
@@ -87,6 +103,7 @@
     <Content Include="sumarnumeroscajas.html" />
     <Content Include="Web.config" />
     <Content Include="xml\alumnos.xml" />
+    <Content Include="xml\ClientesXML.xml" />
     <Content Include="xml\datosempleados.xml" />
     <Content Include="xml\empleados.xml" />
     <Content Include="xml\HOSPITAL_ATRIBUTOS.xml" />
@@ -95,6 +112,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\bootstrap.bundle.js.map" />
+    <Content Include="js\bootstrap.bundle.min.js.map" />
+    <Content Include="js\bootstrap.js.map" />
+    <Content Include="js\bootstrap.min.js.map" />
+    <Content Include="css\bootstrap-grid.css.map" />
+    <Content Include="css\bootstrap-grid.min.css.map" />
+    <Content Include="css\bootstrap-reboot.css.map" />
+    <Content Include="css\bootstrap-reboot.min.css.map" />
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="css\bootstrap.min.css.map" />
+    <Content Include="json\tareas.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
